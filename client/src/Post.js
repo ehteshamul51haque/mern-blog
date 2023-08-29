@@ -1,17 +1,22 @@
-export default function Post() {
+import { format } from 'date-fns'
+import { Link } from 'react-router-dom';
+export default function Post({ _id, title, summary, content, cover, createdAt, author }) {
     return (
         <div className="post">
             <div className="image">
-                <img src="https://i.gadgets360cdn.com/large/galaxy_s23_ultra_samsung_1692438930959.jpg?downsize=950:*" alt="" />
+                <Link to={`/post/${_id}`}>
+                    <img src={'http://localhost:4000/' + cover} alt="" />
+                </Link>
             </div>
             <div className="texts">
-                <h2>Samsung Said to Be Working on 1-Inch and 440-Megapixel Camera Sensors</h2>
+                <Link to={`/post/${_id}`}>
+                    <h2>{title}</h2>
+                </Link>
                 <p className="info">
-                    <a className="author">Haque</a>
-                    <time>2023-08-20 17:20</time>
+                    <a className="author">{author.username}</a>
+                    <time>{format(new Date(createdAt), 'MMM d, yyyy HH:mm')}</time>
                 </p>
-                <p className="summary">Samsung is said to be working on new camera sensors with upgraded specifications. Earlier this year, the South Korean tech giant released its flagship Galaxy S23 series.
-                </p>
+                <p className="summary">{summary} </p>
             </div>
         </div>
     );
